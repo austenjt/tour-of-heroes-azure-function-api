@@ -2,7 +2,7 @@
 <configuration>
 
     <appender name="aiAppender" class="com.microsoft.applicationinsights.logback.ApplicationInsightsAppender">
-        <instrumentationKey>found on the overview page of your app insights instance</instrumentationKey>
+        <instrumentationKey>563db4f2-0127-4e94-828c-4b18309cfa79</instrumentationKey>
     </appender>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">

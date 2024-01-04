@@ -5,14 +5,12 @@ import com.azure.storage.blob.BlobContainerClient;
 import com.azure.storage.blob.BlobServiceClient;
 import com.azure.storage.blob.BlobServiceClientBuilder;
 import com.azure.storage.blob.models.BlobItem;
-import com.azure.storage.blob.models.BlobStorageException;
 import com.azure.storage.common.StorageSharedKeyCredential;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.example.functions.model.Hero;
 import org.example.functions.util.EnvHelper;
 
@@ -20,11 +18,9 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
-import java.util.Set;
 
 @Slf4j
 public class HeroService {
@@ -100,7 +96,6 @@ public class HeroService {
         newHero.setId(newHeroId);
       }
       BlobClient blobClient = heroesContainerClient.getBlobClient(newHero.getId() + ".json");
-      // TODO check that we're not adding a dupe, despite different id
       try {
           String updatedContent = OBJECT_MAPPER.writeValueAsString(newHero);
           ByteArrayInputStream inputStream = new ByteArrayInputStream(updatedContent.getBytes(StandardCharsets.UTF_8));
